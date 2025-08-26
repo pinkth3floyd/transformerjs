@@ -10,8 +10,10 @@ export const dynamic = 'force-dynamic';
 export async function GET(request) {
     try {
         const text = request.nextUrl.searchParams.get('text');
-        const src_lang = request.nextUrl.searchParams.get('src_lang') || 'hin_Deva'; // Hindi
-        const tgt_lang = request.nextUrl.searchParams.get('tgt_lang') || 'fra_Latn'; // French
+        const src_lang = request.nextUrl.searchParams.get('src_lang') || 'eng_Latn'; // Hindi
+        const tgt_lang = request.nextUrl.searchParams.get('tgt_lang') || 'hin_Deva'; // French
+        // const src_lang = request.nextUrl.searchParams.get('src_lang') || 'en'; // Hindi
+        // const tgt_lang = request.nextUrl.searchParams.get('tgt_lang') || 'hin_Deva'; // French
         
         if (!text) {
             return NextResponse.json({
