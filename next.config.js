@@ -8,6 +8,21 @@ const nextConfig = {
     experimental: {
         serverComponentsExternalPackages: ['sharp', 'onnxruntime-node'],
     },
+    
+    // Disable caching for routes that use large models
+    async headers() {
+        return [
+            {
+                source: '/classify',
+                headers: [
+                    {
+                        key: 'Cache-Control',
+                        value: 'no-store, must-revalidate',
+                    },
+                ],
+            },
+        ];
+    },
 };
 
 module.exports = nextConfig;

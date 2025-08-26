@@ -3,13 +3,20 @@ import { pipeline } from "@xenova/transformers";
 // Use the Singleton pattern to enable lazy construction of the pipeline.
 // NOTE: We wrap the class in a function to prevent code duplication (see below).
 const P = () => class PipelineSingleton {
-    static task = 'text-classification';
-    static model = 'Xenova/distilbert-base-uncased-finetuned-sst-2-english';
+
+
+   
+    static task = 'translation';
+    static model = 'Xenova/nllb-200-distilled-600M';
     static instance = null;
 
     static async getInstance(progress_callback = null) {
         if (this.instance === null) {
-            this.instance = pipeline(this.task, this.model, { progress_callback });
+            // Disable caching to avoid Next.js 2MB cache limit issues
+            this.instance = pipeline(this.task, this.model, { 
+                progress_callback,
+                cache: 'no-store' 
+            });
         }
         return this.instance;
     }
